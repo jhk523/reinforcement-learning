@@ -109,8 +109,7 @@ if __name__ == '__main__':
                     if v > new_v:
                         new_v = v
                 V[s] = new_v
-                biggest_change = max(max_change, np.abs(old_vs - V[s]))
-                max_change = biggest_change
+                max_change = np.abs(old_vs - V[s])
 
         # When the value function converges break out of the loop
         if max_change < thresh:
