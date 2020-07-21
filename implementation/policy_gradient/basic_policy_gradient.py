@@ -13,7 +13,8 @@ GAMMA = 0.9
 
 
 class PolicyNetwork(nn.Module):
-    def __init__(self, num_inputs, num_actions, hidden_size, learning_rate=3e-4):
+    def __init__(self, num_inputs, num_actions, hidden_size,
+                 learning_rate=3e-4):
         super(PolicyNetwork, self).__init__()
 
         self.num_actions = num_actions
@@ -30,7 +31,8 @@ class PolicyNetwork(nn.Module):
         state = torch.from_numpy(state).float().unsqueeze(0)
         probs = self.forward(Variable(state))
         highest_prob_action = np.random.choice(self.num_actions,
-                                               p=np.squeeze(probs.detach().numpy()))
+                                               p=np.squeeze(
+                                                   probs.detach().numpy()))
         log_prob = torch.log(probs.squeeze(0)[highest_prob_action])
         return highest_prob_action, log_prob
 
@@ -93,7 +95,9 @@ def main():
                     print('episode: {}, total_reward: {}, average_reward: {},'
                           'length: {}\n'.format(episode,
                                                 np.round(np.sum(rewards), 3),
-                                                np.round(np.mean(all_rewards[-10:]), 3),
+                                                np.round(
+                                                    np.mean(all_rewards[-10:]),
+                                                    3),
                                                 steps))
                     break
             state = new_state
@@ -102,5 +106,6 @@ def main():
     plt.plot(avg_numsteps)
     plt.xlabel("Episode")
     plt.show()
+
 
 main()
